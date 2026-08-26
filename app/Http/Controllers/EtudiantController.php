@@ -12,7 +12,8 @@ class EtudiantController extends Controller
      */
     public function index()
     {
-        //
+        $etudiants = Etudiant::all();
+        return view('etudiants.index', compact('etudiants'));
     }
 
     /**
@@ -20,7 +21,7 @@ class EtudiantController extends Controller
      */
     public function create()
     {
-        //
+        return view('etudiants.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class EtudiantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'date_naissance' => 'required|date',
+        ]);
+
+        Etudiant::create($validated);
+
+        return redirect()->route('etudiants.index')
+            ->with('success', 'Étudiant ajouté avec succès.');
     }
 
     /**
@@ -36,7 +46,7 @@ class EtudiantController extends Controller
      */
     public function show(Etudiant $etudiant)
     {
-        //
+        return view('etudiants.show', compact('etudiant'));
     }
 
     /**
@@ -44,7 +54,7 @@ class EtudiantController extends Controller
      */
     public function edit(Etudiant $etudiant)
     {
-        //
+        return view('etudiants.edit', compact('etudiant'));
     }
 
     /**
@@ -52,7 +62,16 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
-        //
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'date_naissance' => 'required|date',
+        ]);
+
+        $etudiant->update($validated);
+
+        return redirect()->route('etudiants.index')
+            ->with('success', 'Étudiant modifié avec succès.');
     }
 
     /**
@@ -60,6 +79,9 @@ class EtudiantController extends Controller
      */
     public function destroy(Etudiant $etudiant)
     {
-        //
+        $etudiant->delete();
+
+        return redirect()->route('etudiants.index')
+            ->with('success', 'Étudiant supprimé avec succès.');
     }
 }
