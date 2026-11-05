@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Classe extends Model
 {
-    //
+    protected $fillable = ['nom', 'annee_scolaire'];
+
+    public function etudiants()
+    {
+        return $this->hasMany(Etudiant::class);
+    }
 }
