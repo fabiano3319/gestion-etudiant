@@ -5,6 +5,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/etudiants') }}">Étudiants</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('/classes') }}">Classes</a>
+            </li>
         </ul>
     </div>
 </nav>
