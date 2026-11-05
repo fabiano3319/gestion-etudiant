@@ -9,4 +9,6 @@ Route::get('/', function () {
 });
 
 Route::resource('etudiants', EtudiantController::class);
-Route::resource('classes', ClasseController::class);
+Route::resource('classes', ClasseController::class)
+    ->except('show')
+    ->parameters(['classes' => 'classe']);
